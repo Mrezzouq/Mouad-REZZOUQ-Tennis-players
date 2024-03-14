@@ -4,6 +4,14 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.4'
 }
 
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
 group = 'org.atelier.tennisplayer'
 
 java {
@@ -16,10 +24,11 @@ repositories {
 
 dependencies {
     implementation project(':tennis-player-domain')
-    implementation project(':tennis-player-infrastructure')
     implementation 'org.springframework.boot:spring-boot-starter'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
 }
 
 tasks.named('test') {

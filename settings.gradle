@@ -1,1 +1,5 @@
 rootProject.name = 'Mouad-REZZOUQ-Atelier'
+
+include 'tennis-player-infrastructure'
+include 'tennis-player-domain'
+
