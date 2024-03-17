@@ -10,17 +10,23 @@ java {
     sourceCompatibility = '17'
 }
 
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation project(':tennis-player-application')
     implementation project(':tennis-player-domain')
-    implementation project(':tennis-player-infrastructure')
-    implementation 'org.springframework.boot:spring-boot-starter'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 }
 
 tasks.named('test') {
