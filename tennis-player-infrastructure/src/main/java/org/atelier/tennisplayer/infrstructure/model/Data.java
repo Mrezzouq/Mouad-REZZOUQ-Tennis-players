@@ -6,8 +6,8 @@ import org.atelier.tennisplayer.domain.model.AdditionalData;
 import java.util.List;
 import java.util.Objects;
 
-@JsonDeserialize(builder = DataResponse.Builder.class)
-public class DataResponse {
+@JsonDeserialize(builder = Data.Builder.class)
+public class Data {
     private final int rank;
     private final int points;
     private final int weight;
@@ -15,7 +15,7 @@ public class DataResponse {
     private final int age;
     private final List<Integer> last;
 
-    private DataResponse(Builder builder) {
+    private Data(Builder builder) {
         rank = builder.rank;
         points = builder.points;
         weight = builder.weight;
@@ -55,7 +55,7 @@ public class DataResponse {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DataResponse that)) return false;
+        if (!(o instanceof Data that)) return false;
         return rank == that.rank &&
                 points == that.points &&
                 weight == that.weight &&
@@ -71,7 +71,7 @@ public class DataResponse {
 
     @Override
     public String toString() {
-        return "DataResponse{" +
+        return "Data{" +
                 "rank=" + rank +
                 ", points=" + points +
                 ", weight=" + weight +
@@ -132,8 +132,8 @@ public class DataResponse {
             return this;
         }
 
-        public DataResponse build() {
-            return new DataResponse(this);
+        public Data build() {
+            return new Data(this);
         }
     }
 }

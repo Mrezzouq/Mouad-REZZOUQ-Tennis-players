@@ -1,22 +1,22 @@
 package org.atelier.tennisplayer.infrstructure.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.atelier.tennisplayer.domain.model.Player;
+import org.atelier.tennisplayer.domain.model.TennisPlayer;
 
 import java.util.Objects;
 
-@JsonDeserialize(builder = PlayerResponse.Builder.class)
-public class PlayerResponse {
+@JsonDeserialize(builder = Player.Builder.class)
+public class Player {
     private final int id;
     private final String firstname;
     private final String lastname;
     private final String shortname;
     private final String sex;
-    private final CountryResponse country;
+    private final Country country;
     private final String picture;
-    private DataResponse data;
+    private Data data;
 
-    private PlayerResponse(Builder builder) {
+    private Player(Builder builder) {
         id = builder.id;
         firstname = builder.firstname;
         lastname = builder.lastname;
@@ -52,7 +52,7 @@ public class PlayerResponse {
         return sex;
     }
 
-    public CountryResponse getCountry() {
+    public Country getCountry() {
         return country;
     }
 
@@ -60,14 +60,14 @@ public class PlayerResponse {
         return picture;
     }
 
-    public DataResponse getData() {
+    public Data getData() {
         return data;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PlayerResponse that)) return false;
+        if (!(o instanceof Player that)) return false;
         return id == that.id &&
                 Objects.equals(firstname, that.firstname) &&
                 Objects.equals(lastname, that.lastname) &&
@@ -85,7 +85,7 @@ public class PlayerResponse {
 
     @Override
     public String toString() {
-        return "PlayerResponse{" +
+        return "Player{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
@@ -97,8 +97,8 @@ public class PlayerResponse {
                 '}';
     }
 
-    public Player toPlayer() {
-        return Player.builder()
+    public TennisPlayer toPlayer() {
+        return TennisPlayer.builder()
                 .withId(this.id)
                 .withFirstname(this.firstname)
                 .withLastname(this.lastname)
@@ -116,9 +116,9 @@ public class PlayerResponse {
         private String lastname;
         private String shortname;
         private String sex;
-        private CountryResponse country;
+        private Country country;
         private String picture;
-        private DataResponse data;
+        private Data data;
 
         private Builder() {}
 
@@ -147,7 +147,7 @@ public class PlayerResponse {
             return this;
         }
 
-        public Builder withCountry(CountryResponse country) {
+        public Builder withCountry(Country country) {
             this.country = country;
             return this;
         }
@@ -157,13 +157,13 @@ public class PlayerResponse {
             return this;
         }
 
-        public Builder withData(DataResponse data) {
+        public Builder withData(Data data) {
             this.data = data;
             return this;
         }
 
-        public PlayerResponse build() {
-            return new PlayerResponse(this);
+        public Player build() {
+            return new Player(this);
         }
     }
 }

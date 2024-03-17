@@ -2,23 +2,23 @@ package org.atelier.tennisplayer.domain.model;
 
 import java.util.Objects;
 
-public class Player {
+public class TennisPlayer {
     private final int id;
     private final String firstname;
     private final String lastname;
     private final String shortname;
     private final String sex;
-    private final Country country;
+    private final PlayerCountry playerCountry;
     private final String picture;
     private AdditionalData additionalData;
 
-    private Player(Builder builder) {
+    private TennisPlayer(Builder builder) {
         id = builder.id;
         firstname = builder.firstname;
         lastname = builder.lastname;
         shortname = builder.shortname;
         sex = builder.sex;
-        country = builder.country;
+        playerCountry = builder.playerCountry;
         picture = builder.picture;
         additionalData = builder.additionalData;
     }
@@ -47,8 +47,8 @@ public class Player {
         return sex;
     }
 
-    public Country getCountry() {
-        return country;
+    public PlayerCountry getCountry() {
+        return playerCountry;
     }
 
     public String getPicture() {
@@ -62,20 +62,20 @@ public class Player {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Player player)) return false;
+        if (!(o instanceof TennisPlayer player)) return false;
         return id == player.id &&
                 Objects.equals(firstname, player.firstname) &&
                 Objects.equals(lastname, player.lastname) &&
                 Objects.equals(shortname, player.shortname) &&
                 Objects.equals(sex, player.sex) &&
-                Objects.equals(country, player.country) &&
+                Objects.equals(playerCountry, player.playerCountry) &&
                 Objects.equals(picture, player.picture) &&
                 Objects.equals(additionalData, player.additionalData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname, shortname, sex, country, picture, additionalData);
+        return Objects.hash(id, firstname, lastname, shortname, sex, playerCountry, picture, additionalData);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class Player {
                 ", lastname='" + lastname + '\'' +
                 ", shortname='" + shortname + '\'' +
                 ", sex='" + sex + '\'' +
-                ", country=" + country +
+                ", country=" + playerCountry +
                 ", picture='" + picture + '\'' +
                 ", additionalData=" + additionalData +
                 '}';
@@ -98,7 +98,7 @@ public class Player {
         private String lastname;
         private String shortname;
         private String sex;
-        private Country country;
+        private PlayerCountry playerCountry;
         private String picture;
         private AdditionalData additionalData;
 
@@ -129,8 +129,8 @@ public class Player {
             return this;
         }
 
-        public Builder withCountry(Country country) {
-            this.country = country;
+        public Builder withCountry(PlayerCountry playerCountry) {
+            this.playerCountry = playerCountry;
             return this;
         }
 
@@ -144,8 +144,8 @@ public class Player {
             return this;
         }
 
-        public Player build() {
-            return new Player(this);
+        public TennisPlayer build() {
+            return new TennisPlayer(this);
         }
     }
 }

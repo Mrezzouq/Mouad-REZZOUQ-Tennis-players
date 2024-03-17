@@ -2,11 +2,11 @@ package org.atelier.tennisplayer.domain.model;
 
 import java.util.Objects;
 
-public class Country {
+public class PlayerCountry {
     private final String picture;
     private final String code;
 
-    private Country(Builder builder) {
+    private PlayerCountry(Builder builder) {
         picture = builder.picture;
         code = builder.code;
     }
@@ -26,8 +26,8 @@ public class Country {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Country country)) return false;
-        return Objects.equals(picture, country.picture) && Objects.equals(code, country.code);
+        if (!(o instanceof PlayerCountry playerCountry)) return false;
+        return Objects.equals(picture, playerCountry.picture) && Objects.equals(code, playerCountry.code);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class Country {
             return this;
         }
 
-        public Country build() {
-            return new Country(this);
+        public PlayerCountry build() {
+            return new PlayerCountry(this);
         }
     }
 }

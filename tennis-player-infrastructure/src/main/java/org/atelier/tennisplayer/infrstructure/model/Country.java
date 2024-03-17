@@ -1,16 +1,16 @@
 package org.atelier.tennisplayer.infrstructure.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.atelier.tennisplayer.domain.model.Country;
+import org.atelier.tennisplayer.domain.model.PlayerCountry;
 
 import java.util.Objects;
 
-@JsonDeserialize(builder = CountryResponse.Builder.class)
-public class CountryResponse {
+@JsonDeserialize(builder = Country.Builder.class)
+public class Country {
     private final String picture;
     private final String code;
 
-    private CountryResponse(Builder builder) {
+    private Country(Builder builder) {
         picture = builder.picture;
         code = builder.code;
     }
@@ -30,7 +30,7 @@ public class CountryResponse {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CountryResponse that)) return false;
+        if (!(o instanceof Country that)) return false;
         return Objects.equals(picture, that.picture) && Objects.equals(code, that.code);
     }
 
@@ -41,14 +41,14 @@ public class CountryResponse {
 
     @Override
     public String toString() {
-        return "CountryResponse{" +
+        return "Country{" +
                 "picture='" + picture + '\'' +
                 ", code='" + code + '\'' +
                 '}';
     }
 
-    public Country toCountry() {
-        return Country.builder()
+    public PlayerCountry toCountry() {
+        return PlayerCountry.builder()
                 .withCode(this.code)
                 .withPicture(this.picture)
                 .build();
@@ -70,8 +70,8 @@ public class CountryResponse {
             return this;
         }
 
-        public CountryResponse build() {
-            return new CountryResponse(this);
+        public Country build() {
+            return new Country(this);
         }
     }
 }
