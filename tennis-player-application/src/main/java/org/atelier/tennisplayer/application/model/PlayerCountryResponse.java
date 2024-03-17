@@ -9,8 +9,8 @@ public record PlayerCountryResponse(
 
     public static PlayerCountryResponse from(PlayerCountry country) {
         return PlayerCountryResponse.builder()
-                .withCode(country.getCode())
-                .withPicture(country.getPicture())
+                .withCode(country.code())
+                .withPicture(country.picture())
                 .build();
     }
 

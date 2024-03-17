@@ -12,18 +12,17 @@ public record TennisPlayerResponse(
         String picture,
         AdditionalDataResponse additionalData
 ) {
-    public static final TennisPlayerResponse EMPTY = TennisPlayerResponse.builder().build();
 
     public static TennisPlayerResponse from(TennisPlayer player) {
         return TennisPlayerResponse.builder()
-                .withId(player.getId())
-                .withFirstname(player.getFirstname())
-                .withLastname(player.getLastname())
-                .withShortname(player.getShortname())
-                .withSex(player.getSex())
-                .withPlayerCountry(PlayerCountryResponse.from(player.getCountry()))
-                .withPicture(player.getPicture())
-                .withAdditionalData(AdditionalDataResponse.from(player.getAdditionalData()))
+                .withId(player.id())
+                .withFirstname(player.firstname())
+                .withLastname(player.lastname())
+                .withShortname(player.shortname())
+                .withSex(player.sex())
+                .withPlayerCountry(PlayerCountryResponse.from(player.playerCountry()))
+                .withPicture(player.picture())
+                .withAdditionalData(AdditionalDataResponse.from(player.additionalData()))
                 .build();
     }
 

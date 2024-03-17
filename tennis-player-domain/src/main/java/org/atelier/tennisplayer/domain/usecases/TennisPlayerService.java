@@ -28,7 +28,7 @@ public class TennisPlayerService implements TennisPlayerUseCase {
     public List<TennisPlayer> retrieveSortedPlayers() {
         return this.tennisPlayerRepository.retrieveTennisPlayers()
                 .stream()
-                .sorted(Comparator.comparingInt(player -> player.getAdditionalData().getRank()))
+                .sorted(Comparator.comparingInt(player -> player.additionalData().rank()))
                 .toList();
     }
 
@@ -55,8 +55,8 @@ public class TennisPlayerService implements TennisPlayerUseCase {
     private String getCountryWithHighestWinRatio(List<TennisPlayer> players) {
         return players.stream()
                 .collect(Collectors.groupingBy(
-                        player -> player.getCountry().getCode(),
-                        Collectors.averagingDouble(player -> player.getAdditionalData().getLast().stream().mapToInt(Integer::intValue).average().orElse(0.0))
+                        player -> player.playerCountry().code(),
+                        Collectors.averagingDouble(player -> player.additionalData().last().stream().mapToInt(Integer::intValue).average().orElse(0.0))
                 ))
                 .entrySet()
                 .stream()
@@ -69,8 +69,8 @@ public class TennisPlayerService implements TennisPlayerUseCase {
         if (players.isEmpty()) return BigDecimal.ZERO;
         return players.stream()
                 .map(player -> {
-                    var weight = BigDecimal.valueOf(player.getAdditionalData().getWeight()).divide(BigDecimal.valueOf(1000), 2, RoundingMode.HALF_UP);
-                    var heightInMeters = BigDecimal.valueOf(player.getAdditionalData().getHeight()).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+                    var weight = BigDecimal.valueOf(player.additionalData().weight()).divide(BigDecimal.valueOf(1000), 2, RoundingMode.HALF_UP);
+                    var heightInMeters = BigDecimal.valueOf(player.additionalData().height()).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
                     return weight.divide(heightInMeters.pow(2), 2, RoundingMode.HALF_UP);
                 })
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
@@ -79,7 +79,7 @@ public class TennisPlayerService implements TennisPlayerUseCase {
 
     private BigDecimal getMedianHeight(List<TennisPlayer> players) {
         var heights = players.stream()
-                .map(tennisPlayer -> tennisPlayer.getAdditionalData().getHeight())
+                .map(tennisPlayer -> tennisPlayer.additionalData().height())
                 .sorted()
                 .toList();
         if (heights.isEmpty()) {

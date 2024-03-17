@@ -11,7 +11,6 @@ import org.atelier.tennisplayer.application.model.PlayersResponse;
 import org.atelier.tennisplayer.application.model.StatisticsResponse;
 import org.atelier.tennisplayer.application.model.TennisPlayerResponse;
 import org.atelier.tennisplayer.domain.port.in.TennisPlayerUseCase;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -53,7 +52,7 @@ public class TennisPlayerController {
             @PathVariable @NotBlank @Parameter(description = "Identifiant d'un joueur") int playerId) {
         var result = tennisPlayerUseCase.retrievePlayerById(playerId);
         return result.map(player -> ResponseEntity.ok(TennisPlayerResponse.from(player)))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(TennisPlayerResponse.EMPTY));
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping(value = "/statistics", produces = MediaType.APPLICATION_JSON_VALUE)

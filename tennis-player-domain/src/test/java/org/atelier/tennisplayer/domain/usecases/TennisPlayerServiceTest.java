@@ -158,9 +158,59 @@ class TennisPlayerServiceTest {
 
             // Assert
             assertAll(
-                    () -> assertThat(actual.getCountryWithHighestWinRatio()).isEqualTo("SRB"),
-                    () -> assertThat(actual.getAverageBmi()).isEqualTo(new BigDecimal("23.74")),
-                    () -> assertThat(actual.getMedianHeight()).isEqualTo(new BigDecimal("186.50"))
+                    () -> assertThat(actual.countryWithHighestWinRatio()).isEqualTo("SRB"),
+                    () -> assertThat(actual.averageBmi()).isEqualTo(new BigDecimal("23.74")),
+                    () -> assertThat(actual.medianHeight()).isEqualTo(new BigDecimal("186.50"))
+            );
+        }
+
+        @Test
+        void should_calculate_statistics() {
+            // Arrange
+            var player1 = buildTennisPlayer(1, "Novak", "Djokovic")
+                    .withCountry(buildCountry("SRB"))
+                    .withAdditionalData(AdditionalData.builder()
+                            .withRank(2)
+                            .withPoints(2542)
+                            .withWeight(80000)
+                            .withHeight(188)
+                            .withAge(31)
+                            .withLast(List.of(1, 1, 1, 1, 1))
+                            .build())
+                    .build();
+            var player2 = buildTennisPlayer(2, "Rafael", "Nadal")
+                    .withCountry(buildCountry("ESP"))
+                    .withAdditionalData(AdditionalData.builder()
+                            .withRank(1)
+                            .withPoints(1982)
+                            .withWeight(85000)
+                            .withHeight(185)
+                            .withAge(33)
+                            .withLast(List.of(1, 0, 0, 0, 1))
+                            .build())
+                    .build();
+
+            var player3 = buildTennisPlayer(3, "Ugo", "Humbert")
+                    .withCountry(buildCountry("FR"))
+                    .withAdditionalData(AdditionalData.builder()
+                            .withRank(14)
+                            .withPoints(1982)
+                            .withWeight(85000)
+                            .withHeight(175)
+                            .withAge(33)
+                            .withLast(List.of(1, 0, 1, 0, 1))
+                            .build())
+                    .build();
+            when(tennisPlayerRepository.retrieveTennisPlayers()).thenReturn(List.of(player1, player2, player3));
+
+            // Act
+            var actual = tennisPlayerService.retrieveStatistics();
+
+            // Assert
+            assertAll(
+                    () -> assertThat(actual.countryWithHighestWinRatio()).isEqualTo("SRB"),
+                    () -> assertThat(actual.averageBmi()).isEqualTo(new BigDecimal("25.08")),
+                    () -> assertThat(actual.medianHeight()).isEqualTo(new BigDecimal("185"))
             );
         }
 
@@ -174,9 +224,9 @@ class TennisPlayerServiceTest {
 
             // Assert
             assertAll(
-                    () -> assertThat(actual.getCountryWithHighestWinRatio()).isEqualTo("N/A"),
-                    () -> assertThat(actual.getAverageBmi()).isEqualTo(BigDecimal.ZERO),
-                    () -> assertThat(actual.getMedianHeight()).isEqualTo(BigDecimal.ZERO)
+                    () -> assertThat(actual.countryWithHighestWinRatio()).isEqualTo("N/A"),
+                    () -> assertThat(actual.averageBmi()).isEqualTo(BigDecimal.ZERO),
+                    () -> assertThat(actual.medianHeight()).isEqualTo(BigDecimal.ZERO)
             );
         }
     }

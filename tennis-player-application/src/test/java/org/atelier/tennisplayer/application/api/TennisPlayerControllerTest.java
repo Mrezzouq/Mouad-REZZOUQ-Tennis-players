@@ -136,7 +136,7 @@ class TennisPlayerControllerTest {
         private static Stream<Arguments> providePlayerById() {
             return Stream.of(
                     Arguments.of(1, Optional.of(buildTennisPlayer()), HttpStatus.OK, buildTennisPlayerResponse()),
-                    Arguments.of(99, Optional.empty(), HttpStatus.NOT_FOUND, TennisPlayerResponse.EMPTY)
+                    Arguments.of(99, Optional.empty(), HttpStatus.NOT_FOUND, null)
             );
         }
 

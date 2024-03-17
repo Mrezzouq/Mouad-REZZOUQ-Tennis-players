@@ -40,17 +40,17 @@ public class TennisPlayerRetriever implements TennisPlayerRepository {
 
     @Override
     public List<TennisPlayer> retrieveTennisPlayers() {
-        return players.getPlayers().stream()
-                .map(Player::toPlayer)
+        return players.players().stream()
+                .map(Player::toTennisPlayer)
                 .toList();
     }
 
     @Override
     public TennisPlayer retrievePlayerById(int playerId) {
-        return players.getPlayers().stream()
-                .filter(player -> playerId == player.getId())
+        return players.players().stream()
+                .filter(player -> playerId == player.id())
                 .findFirst()
-                .map(Player::toPlayer)
+                .map(Player::toTennisPlayer)
                 .orElseThrow(() -> new TennisPlayerNotFoundException("No player found with ID: " + playerId));
     }
 }

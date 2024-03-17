@@ -15,12 +15,12 @@ public record AdditionalDataResponse(
 
     public static AdditionalDataResponse from(AdditionalData additionalData) {
         return AdditionalDataResponse.builder()
-                .withRank(additionalData.getRank())
-                .withPoints(additionalData.getPoints())
-                .withWeight(additionalData.getWeight())
-                .withHeight(additionalData.getHeight())
-                .withAge(additionalData.getAge())
-                .withLast(additionalData.getLast())
+                .withRank(additionalData.rank())
+                .withPoints(additionalData.points())
+                .withWeight(additionalData.weight())
+                .withHeight(additionalData.height())
+                .withAge(additionalData.age())
+                .withLast(additionalData.last())
                 .build();
     }
 

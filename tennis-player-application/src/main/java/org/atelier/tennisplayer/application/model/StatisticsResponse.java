@@ -12,9 +12,9 @@ public record StatisticsResponse(
 
     public static StatisticsResponse from(Statistics statistics) {
         return StatisticsResponse.builder()
-                .withCountryWithHighestWinRatio(statistics.getCountryWithHighestWinRatio())
-                .withAverageBmi(statistics.getAverageBmi())
-                .withMedianHeight(statistics.getMedianHeight())
+                .withCountryWithHighestWinRatio(statistics.countryWithHighestWinRatio())
+                .withAverageBmi(statistics.averageBmi())
+                .withMedianHeight(statistics.medianHeight())
                 .build();
     }
 

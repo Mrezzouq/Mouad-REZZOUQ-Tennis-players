@@ -6,51 +6,19 @@ import org.atelier.tennisplayer.domain.model.PlayerCountry;
 import java.util.Objects;
 
 @JsonDeserialize(builder = Country.Builder.class)
-public class Country {
-    private final String picture;
-    private final String code;
-
-    private Country(Builder builder) {
-        picture = builder.picture;
-        code = builder.code;
-    }
+public record Country (
+        String picture,
+        String code
+){
 
     public static Builder builder() {
         return new Builder();
     }
 
-    public String getPicture() {
-        return picture;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Country that)) return false;
-        return Objects.equals(picture, that.picture) && Objects.equals(code, that.code);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(picture, code);
-    }
-
-    @Override
-    public String toString() {
-        return "Country{" +
-                "picture='" + picture + '\'' +
-                ", code='" + code + '\'' +
-                '}';
-    }
-
     public PlayerCountry toCountry() {
         return PlayerCountry.builder()
-                .withCode(this.code)
-                .withPicture(this.picture)
+                .withCode(code)
+                .withPicture(picture)
                 .build();
     }
 
@@ -71,7 +39,7 @@ public class Country {
         }
 
         public Country build() {
-            return new Country(this);
+            return new Country(picture, code);
         }
     }
 }

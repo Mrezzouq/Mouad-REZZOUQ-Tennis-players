@@ -3,101 +3,23 @@ package org.atelier.tennisplayer.infrstructure.model;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.atelier.tennisplayer.domain.model.TennisPlayer;
 
-import java.util.Objects;
-
 @JsonDeserialize(builder = Player.Builder.class)
-public class Player {
-    private final int id;
-    private final String firstname;
-    private final String lastname;
-    private final String shortname;
-    private final String sex;
-    private final Country country;
-    private final String picture;
-    private Data data;
-
-    private Player(Builder builder) {
-        id = builder.id;
-        firstname = builder.firstname;
-        lastname = builder.lastname;
-        shortname = builder.shortname;
-        sex = builder.sex;
-        country = builder.country;
-        picture = builder.picture;
-        data = builder.data;
-    }
+public record Player(
+        int id,
+        String firstname,
+        String lastname,
+        String shortname,
+        String sex,
+        Country country,
+        String picture,
+        Data data
+) {
 
     public static Builder builder() {
         return new Builder();
     }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public String getShortname() {
-        return shortname;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public Data getData() {
-        return data;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Player that)) return false;
-        return id == that.id &&
-                Objects.equals(firstname, that.firstname) &&
-                Objects.equals(lastname, that.lastname) &&
-                Objects.equals(shortname, that.shortname) &&
-                Objects.equals(sex, that.sex) &&
-                Objects.equals(country, that.country) &&
-                Objects.equals(picture, that.picture) &&
-                Objects.equals(data, that.data);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, lastname, shortname, sex, country, picture, data);
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", shortname='" + shortname + '\'' +
-                ", sex='" + sex + '\'' +
-                ", country=" + country +
-                ", picture='" + picture + '\'' +
-                ", data=" + data +
-                '}';
-    }
-
-    public TennisPlayer toPlayer() {
+    public TennisPlayer toTennisPlayer() {
         return TennisPlayer.builder()
                 .withId(this.id)
                 .withFirstname(this.firstname)
@@ -163,7 +85,7 @@ public class Player {
         }
 
         public Player build() {
-            return new Player(this);
+            return new Player(id, firstname, lastname, shortname, sex, country, picture, data);
         }
     }
 }
