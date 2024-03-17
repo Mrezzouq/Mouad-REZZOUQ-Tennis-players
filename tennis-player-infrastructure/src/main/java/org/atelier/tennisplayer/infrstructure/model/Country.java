@@ -3,8 +3,6 @@ package org.atelier.tennisplayer.infrstructure.model;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.atelier.tennisplayer.domain.model.PlayerCountry;
 
-import java.util.Objects;
-
 @JsonDeserialize(builder = Country.Builder.class)
 public record Country (
         String picture,
