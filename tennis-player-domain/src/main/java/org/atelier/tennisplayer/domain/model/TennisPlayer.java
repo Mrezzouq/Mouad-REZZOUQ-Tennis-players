@@ -10,7 +10,7 @@ public class TennisPlayer {
     private final String sex;
     private final PlayerCountry playerCountry;
     private final String picture;
-    private AdditionalData additionalData;
+    private final AdditionalData additionalData;
 
     private TennisPlayer(Builder builder) {
         id = builder.id;
