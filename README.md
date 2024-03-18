@@ -26,7 +26,9 @@ L'application devrait maintenant être accessible sur http://localhost:8080/swag
 
 L'image Docker de l'application est disponible sur mon Docker Hub. Pour la récupérer, veuillez exécuter la commande
 suivante dans votre terminal. Cela permettra de télécharger l'image nécessaire pour exécuter l'application
+
 ``docker pull rq8mouad/tennis_players:latest``
+
 
 Après avoir récupéré l'image, vous pouvez démarrer l'application de deux manières. La première méthode consiste à
 utiliser docker-compose up. Cette commande recherche le fichier docker-compose.yml dans le répertoire courant et lance
@@ -52,3 +54,4 @@ l'application est accessible via les API suivantes :
   ``http://13.38.48.45:8080/v1/tennis-player/{playerId}``
 - pour les statistiques des joueurs :
   ``http://13.38.48.45:8080/v1/tennis-player/statistics``
+
